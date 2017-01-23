@@ -1,0 +1,8 @@
+{% extends "tickets/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="center">
+	<h2 class='login'><a class='lineless' href='/accounts/login/'><img class='raven' src="{% static 'images/raven.png' %}"></a><a href='/accounts/login/'>Current Student Login</a></h2>
+	<p><a class='login' href='/alumni/login/'>Alumni Login</a><a class='login' href='/staff/login/'>Christ's Fellows/Staff Login</a></p>
+</div>
+{% endblock %}

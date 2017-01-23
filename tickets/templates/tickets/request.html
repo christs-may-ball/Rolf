@@ -1,0 +1,53 @@
+{% extends "tickets/base.html" %}
+
+{% block content %}
+<h2 class='center'>Request a Ticket</h2>
+{% if form.errors %}
+<p class='center err'>Please double check that all inputs are filled in correctly.</p>
+{% endif %}
+
+<form method="post" action="{% url "request" %}">
+{% csrf_token %}
+<div class='piece'>
+<div class='label'>Ticket {{ form.first_name.label_tag }}</div>
+{{ form.first_name }}
+</div>
+<div class='piece'>
+<div class='label'>Ticket {{ form.last_name.label_tag }}</div>
+{{ form.last_name }}
+</div>
+<div class='piece'>
+<div class='label'>Ticket {{ form.crsid.label_tag }} <em>(current university members only)</em></div>
+{{ form.crsid }}
+</div>
+<div class='piece'>
+<div class='label'>{{ form.diet.label_tag }} <em>(if applicable)</em></div>
+{{ form.diet }}
+</div>
+<div class='piece'>
+<div class='label'>{{ form.access.label_tag }} <em>(if applicable)</em></div>
+{{ form.access }}
+</div>
+<div class='piece'>
+<input class='enter' type="submit" value="Submit Ticket Request"/>
+</div>
+<input type="hidden" name="next" value="{{ next }}"/>
+</form>
+<h5 class='center'>You will not recieve a confirmation email if your request is immediately approved</h5>
+
+<script>
+jQuery.fn.preventDoubleSubmission = function() {
+  $(this).on('submit',function(e){
+    var $form = $(this);
+    if ($form.data('submitted') === true) {
+      e.preventDefault();
+    } else {
+      $form.data('submitted', true);
+    }
+  });
+  return this;
+};
+$('.enter').preventDoubleSubmission();
+</script>
+
+{% endblock %}

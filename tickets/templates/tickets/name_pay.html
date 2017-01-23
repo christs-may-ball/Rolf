@@ -1,0 +1,31 @@
+{% extends "tickets/base.html" %}
+
+{% block content %}
+
+<h3 class='center'>This new name for this ticket will be <strong>{{ form.first_name.value }} {{ form.last_name.value }}{% if form.crsid.value %} <em>({{ form.crsid.value }})</em>{% endif %}</strong>.</h3>
+<h3 class='center'>A payment of £20 is required.</h3>
+<br>
+<div class='center'>
+<form action="{% url "namepay" pk=pk %}" method="POST">
+{% csrf_token %}
+{{ form.crsid.as_hidden }}
+{{ form.first_name.as_hidden }}
+{{ form.last_name.as_hidden }}
+{{ form.diet.as_hidden }}
+{{ form.access.as_hidden }}
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_live_dJR7ph1tS5glGkS7aBMUvwMH"
+    data-amount="2000"
+    data-currency="gbp"
+    data-name="Christ's May Ball"
+    data-description="Name Change Payment"
+    data-image="static/images/payment.png"
+    data-email="{{ email }}"
+    data-zip-code="true"
+    data-locale="auto">
+  </script>
+</form>
+</div>
+
+{% endblock %}

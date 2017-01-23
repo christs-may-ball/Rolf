@@ -1,0 +1,55 @@
+{% extends "tickets/base.html" %}
+
+{% block content %}
+<h2 class='center'>Alumni Registration</h2>
+{% if form.errors %}
+<p class='center err'>Please double check that you have correctly entered your details and that your passwords match.</p>
+{% endif %}
+<form method="post" action="{% url "register" %}">
+{% csrf_token %}
+<div class='piece'>
+    <div class='label'>{{ form.username.label_tag }}</div>
+    {{ form.username }}
+</div>
+<div class='piece'>
+    <div class='label'>{{ form.password1.label_tag }}</div>
+    {{ form.password1 }}
+    <h5>Your password must contain at least 8 characters, can't be a commonly used password, too similar to your other personal information or contain only numerical characters.</h5>
+</div>
+<div class='piece'>
+    <div class='label'>{{ form.password2.label_tag }}</div>
+    {{ form.password2 }}
+</div>
+<div class='piece'>
+    <div class='label'>{{ form.first_name.label_tag }}</div>
+    {{ form.first_name }}
+</div>
+<div class='piece'>
+    <div class='label'>{{ form.last_name.label_tag }}</div>
+    {{ form.last_name }}
+</div>
+<div class='piece'>
+    <div class='label'>{{ form.address.label_tag }}</div>
+    {{ form.address }}
+</div>
+<div class='piece'>
+    {{ form.matriculation_year.label_tag }}
+    {{ form.matriculation_year }}
+</div>
+<div class='piece'>
+    {{ form.tripos.label_tag }}
+    {{ form.tripos }}
+</div>
+<div class='piece'>
+    {{ form.dob.label_tag }}
+    {{ form.dob }}
+</div>
+<div class='piece'>
+<input type="submit" value="Register" />
+</div>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<p class='center'><a href="{% url "login" %}">I already have an account</a></p>
+
+{% endblock %}

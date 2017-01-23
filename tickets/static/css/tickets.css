@@ -1,0 +1,222 @@
+html, body {
+	font-family: "Halant", serif;
+	padding: 0;
+	margin: 0;
+    background-color: #fff;
+	color: #231c22;
+}
+
+h2 {
+	font-weight: normal;
+	font-size: 26px;
+	margin: 0 0 30px 0;
+}
+
+h3 {
+	font-weight: 300;
+	font-size: 22px;
+	margin: 0 0 10px 0;
+}
+
+h4 {
+	font-weight: 400;
+	font-size: 16px;
+	margin: -10px 0 10px 0;
+}
+
+h5 {
+	font-weight: 300;
+	font-size: 14px;
+	margin: 0;
+}
+
+p, span {
+	font-size: 18px;
+}
+
+p, span, a {
+	font-family: "Halant", serif;
+	font-weight: 400;
+	margin: 0;
+}
+
+strong {
+	font-weight: 600;
+}
+
+a {
+	text-decoration: none;
+	color: #231c22;
+	transition: opacity 0.3s;
+	border-style: solid;
+	border-width: 0 0 1px 0;
+	opacity: 0.9;
+}
+
+a:hover {
+	opacity: 0.6;
+}
+
+.container {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto 0 auto;
+	padding: 60px 20px 60px 20px;
+	box-sizing: border-box;
+}
+
+.header {
+	text-align: center;
+	margin-bottom: 40px;
+}
+
+.header img {
+	width: 100%;
+	max-width: 350px;
+}
+
+.center {
+	text-align: center;
+}
+
+.lineless {
+	border: none;
+}
+
+.raven {
+	margin: 0 20px -20px 0;
+}
+
+.login {
+	margin: 0 10px 20px 10px;
+}
+
+.ticket, .request, .charity, .payment {
+	width: 100%;
+	background-color: #fcfcfc;
+	padding: 20px;
+	margin-left: -20px;
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px 0 0 0;
+	overflow:auto;
+}
+
+.ticket:last-child {
+	border-width: 1px 0 1px 0;
+	margin-bottom: 40px;
+}
+
+.P {
+	color: #888;
+}
+
+.S {
+	color: #00b75f;
+}
+
+.Q {
+	color: #9b00b7;
+}
+
+.D {
+	color: #0045b7;
+}
+
+.H {
+	color: #e9af00;
+}
+
+.action {
+	float: right;
+}
+
+.ticket .action {
+  font-size: 15px;
+  line-height: 30px;
+}
+
+.change {
+	display: inline-block;
+	vertical-align: middle;
+	border: none;
+	text-align: center;
+	width: 40px;
+	font-size: 14px;
+	line-height: 14px;
+	margin-left: 10px;
+}
+
+.request, .charity, .payment {
+	margin: 0 0 40px -20px;
+	border-width: 1px 0 1px 0;
+}
+
+.charity {
+	background-color: #e5f2dc;
+	border-color: #b7da9f;
+}
+
+.charity a {
+	color: #5b992f;
+}
+
+.stripe-button-el {
+	margin-top: -26px;
+}
+
+.process {
+	margin: -14px 0 20px 0;
+}
+
+.payment {
+	padding-bottom: 0;
+}
+
+.err {
+	color: #cb294c;
+	margin-bottom: 20px;
+}
+
+.success {
+	color: #5b992f;
+	margin-bottom: 20px;
+}
+
+.piece {
+	width: 100%;
+	max-width: 400px;
+	margin: 0 auto 20px auto;
+}
+
+input{
+	width: 100%;
+	background-color: #fcfcfc;
+	font-family: "Halant", serif;
+	font-weight: 400;
+	font-size: 22px;
+	border-color: #ccc;
+	border-style: solid;
+	border-width: 1px;
+}
+
+input[type=submit] {
+	margin-top: 20px;
+	font-size: 18px;
+	height: 50px;
+	transition: background-color 0.3s;
+}
+
+input[type=submit]:hover {
+	background-color: #eee;
+}
+
+.footer {
+	margin: 0 auto 40px auto;
+}
+
+.footer a {
+	color: #888;
+	border: none;
+	font-size: 14px;
+}

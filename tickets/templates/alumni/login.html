@@ -1,0 +1,29 @@
+{% extends "tickets/base.html" %}
+
+{% block content %}
+<h2 class='center'>Alumni Login</h2>
+{% if form.errors %}
+<p class='center err'>Your email and password didn't match. Please try again.</p>
+{% endif %}
+
+<form method="post" action="{% url "login" %}">
+{% csrf_token %}
+<div class='piece'>
+<div class='label'>Email address:</div>
+{{ form.username }}
+</div>
+<div class='piece'>
+<div class='label'>{{ form.password.label_tag }}</div>
+{{ form.password }}
+</div>
+</table>
+<div class='piece'>
+<input type="submit" value="Login" />
+</div>
+<input type="hidden" name="next" value="{{ next }}" />
+</form>
+
+<p class='center login'><a href="{% url "register" %}">Register an Account</a></p>
+<h5 class='center login'><a href="/">Student or Staff Login</a></h5>
+
+{% endblock %}

@@ -1,0 +1,9 @@
+{% extends "tickets/base.html" %}
+{% load staticfiles %}
+{% block content %}
+<div class="center">
+	<h3>Are you sure you want to upgrade your ticket?</h3>
+	<h4>This decision cannot be reversed.</h4>
+	<h3><a class='login' href='/{{ confirmation }}'>Yes</a><a class='login' href='/'>No</a></h3>
+</div>
+{% endblock %}

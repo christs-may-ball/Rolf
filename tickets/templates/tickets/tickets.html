@@ -1,0 +1,69 @@
+{% extends "tickets/base.html" %}
+{% block content %}
+<div class='tickets'>
+{% if other_request %}
+<p class='center'>{{ other_request.user.first_name }} {{ other_request.user.last_name }} has booked you a <span class='{{ other_request.status }}'><em>{{ other_request.get_status_display }}</em></span> ticket for the ball.</p><br>
+{% endif %}
+{% for request in requests %}
+	<div class='ticket'>
+        <span><strong>{{ request.ticket_first_name }} {{ request.ticket_last_name }}{% if request.ticket_crsid %}, {{ request.ticket_crsid }}{% endif %}:</strong></span>
+        <span class='{{ request.status }}'><em>{% if request.status != 'P' %}{{ request.get_status_display }}{% else %}{% if owe %}Unpaid{% else %}Sold Out{% endif %}{% endif %}</em></span>
+        {# <a class="change" href="/tickets/name/{{ request.id }}/">Change Name</a> #}
+        <span class='action'>{% if request.status == 'H' %}<a href="/tickets/confirm/tickets/standard/{{ request.id }}/">Upgrade to Standard Ticket (£140)</a>{% elif avail_queue or avail_dining %}{% if request.status == 'S' or request.status == 'Q' %}Available upgrades:
+        {% if request.status == 'S' and request.priority != 'ST' %}{% if avail_queue %}<a href="/tickets/confirm/tickets/queue/{{ request.id }}/">Queue Jump (£155)</a>{% else %}Queue Jump sold out{% endif %}, {% endif %}{% if avail_dining %}<a href="/tickets/confirm/tickets/dining/{{ request.id }}/">Dining (£185)</a>{% else %}Dining sold out{% endif %}{% endif %}{% else %}Upgrades sold out{% endif %}</span>
+	</div>
+{% endfor %}
+</div>
+{% if more %}
+<div class='request center'><a href='/tickets/request/'>Make a Ticket Request</a></div>
+{% endif %}
+{% if owe %}
+<div class='charity'>
+<p>This charity donations will be split between May Ball Presidents' Committee charities <a href="http://mbpc.soc.srcf.net/contact/charity/">Afrinspire and Cambridge Rape Crisis Centre</a> and the JCR charities, please consider adding a donation to your ticket purchase (+£2 per ticket)</p>
+{% if user.detail.charity %}
+<p class='action'><a href="/tickets/charity/">Remove my charity donation</a></p>
+{% else %}
+<p class='action'><a href="/tickets/charity/">Add a charity donation</a></p>
+{% endif %}
+</div>
+{% endif %}
+<div class='center'>
+<h5>Cost: <strong>£{{ cost }}</strong>{% if postage %}, P&amp;P: <strong>£{{ postage }}{% endif %}</strong>, Paid: <strong>£{{ user.detail.balance }}</strong></h5>
+<h2>To Pay: <strong>£{{ owe }}</strong></h2>
+{% if owe %}
+<form action="{% url "pay" %}" method="POST">
+{% csrf_token %}
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="pk_live_dJR7ph1tS5glGkS7aBMUvwMH"
+    data-amount="{{ stripe }}"
+    data-currency="gbp"
+    data-name="Christ's May Ball"
+    data-description="Ticket Payment £{{ owe }}.00 + £{{ processing }}"
+    data-image="static/images/payment.png"
+    data-email="{{ email }}"
+    data-zip-code="true"
+    data-locale="auto">
+  </script>
+</form>
+<script>document.write("<h5 class='process'>+ <strong>£{{ processing }}</strong> for processing</h5>");</script>
+{% endif %}
+</div>
+<div class='payment'>
+{% if user.detail.college == 'Sta' %}
+<p>Payment can alternatively be performed by bank transfer using the following information:</p>
+<h3>Payment Reference: <strong>{{ ref }}</strong></h3>
+<h4>Account Number: <strong>40918352</strong></h4>
+<h4>Sort Code: <strong>09-06-66</strong></h4>
+<h4>IBAN: <strong>GB52ABBY09066640918352</strong></h4>
+<h4>BIC Swift Code: <strong>ABBYGB2LXXX</strong></h4>
+<h4>Amount: <strong>£{{ owe }}</strong></h4>
+<p class='err'>Payment Deadline: <strong>31st January 2016</strong></p>
+{% else %}
+<p class='err'>Payment can no longer be performed by bank transfer</p>
+{% endif %}
+</div>
+<div class='center'>
+<a class='login' href='http://christsmayball.com/terms.pdf'>T&amp;Cs</a><a class='login' href='http://christsmayball.com/ticketing.html'>FAQs</a>{% if user.is_superuser %}<a class='login' href="/admin/">Admin</a>{% endif %}<a class='login' href='/accounts/logout/'>Logout</a>
+</div>
+{% endblock %}
